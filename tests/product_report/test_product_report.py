@@ -18,5 +18,5 @@ def test_relatorio_produto():
         f" fabricado em {result_product.data_de_fabricacao}"
         f" por {result_product.nome_da_empresa} com validade"
         f" até {result_product.data_de_validade}"
-        f" precisa ser armazenado {result_product.instrucoes_de_armazenamento}."
+        f" precisa ser armazenado {result_product.instrucoes_de_armazenamento}"
     )

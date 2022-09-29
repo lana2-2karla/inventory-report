@@ -19,7 +19,7 @@ class SimpleReport:
         expiration_date = [
             cls.ConvertToDate(product["data_de_validade"])
             for product in products
-            if cls.ConvertToDate(product["data_de_validade"]) <= datetime.now()
+            if cls.ConvertToDate(product["data_de_validade"]) >= datetime.now()
         ]
         print(expiration_date)
         most_current_expiration_date = max(expiration_date)

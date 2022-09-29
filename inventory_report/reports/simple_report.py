@@ -21,8 +21,8 @@ class SimpleReport:
             for product in products
             if cls.ConvertToDate(product["data_de_validade"]) >= datetime.now()
         ]
-        print(expiration_date)
-        most_current_expiration_date = max(expiration_date)
+
+        most_current_expiration_date = min(expiration_date)
 
         company_name = max(
             Counter([product["nome_da_empresa"] for product in products])

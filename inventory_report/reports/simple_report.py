@@ -1,11 +1,11 @@
 from collections import Counter
-from datetime import datetime
+from datetime import date
 
 
 class SimpleReport:
     @classmethod
     def ConvertToDate(cls, text: str):
-        return datetime.strptime(text, "%Y-%m-%d")
+        return date.fromisoformat(text)
 
     @classmethod
     def generate(cls, products: list):
@@ -19,17 +19,19 @@ class SimpleReport:
         expiration_date = [
             cls.ConvertToDate(product["data_de_validade"])
             for product in products
-            if cls.ConvertToDate(product["data_de_validade"]) >= datetime.now()
+            if cls.ConvertToDate(product["data_de_validade"]) >= date.today()
         ]
 
         most_current_expiration_date = min(expiration_date)
 
-        company_name = max(
-            Counter([product["nome_da_empresa"] for product in products])
-        )
+        company_name = Counter(
+            [product["nome_da_empresa"] for product in products]
+        ).most_common(1)
 
         return (
-            f"Data de fabricação mais antiga: {oldest_manufacturing_date}"
-            f"Data de validade mais próxima: {most_current_expiration_date}"
-            f"Empresa com mais produtos: {company_name}"
+            f"Data de fabricação mais antiga: {oldest_manufacturing_date}\n"
+            f"""Data de validade mais próxima: {
+                most_current_expiration_date
+                }\n"""
+            f"Empresa com mais produtos: {company_name[0][0]}"
         )
